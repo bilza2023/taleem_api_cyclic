@@ -24,7 +24,7 @@ app.get('/', async (req, res) =>{
     res.status(200).json({success :true ,  message : "Welcome to Taleem Cyclic API"});
 });
 ///////////////////////////////////////////////////////////////////////
-mongoose.connect( process.env.DB_URL , { useNewUrlParser: true});
+mongoose.connect( "mongodb+srv://bilza2024:bils32611@taleem-db.oyecc5h.mongodb.net/" , { useNewUrlParser: true});
 const db = mongoose.connection;
 db.once('open',()=> {
     console.log("MongoDb ===> connection established")
