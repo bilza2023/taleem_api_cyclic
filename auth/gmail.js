@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const {API_URL} = require("../lib/config.js");
+const {API_URL} = require("../config.js");
 
 async function sendGmail(studentemail,verificationId) {
     const transporter = nodemailer.createTransport({
@@ -21,7 +21,7 @@ debugger;
         html: `<p>Congratulations! Your account on taleem.help has been successfully created. To get started with our educational tutorials, please verify your account by clicking on the link provided below. We're excited to support your learning journey!
 </p>
         <br/>
-        <a href='${API_URL}/auth/verify?id=${verificationId}&email=${studentemail}'>VERIFY</a>
+        <a href='https://joyous-tan-jodhpurs.cyclic.app/auth/verify?id=${verificationId}&email=${studentemail}'>VERIFY</a>
         ` 
     });
 

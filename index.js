@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const db = require("./mongo.js");
 // const {DB_URL} = require("./lib/config.js");
 /////////////////////////////////////////////----->>>>
-// const auth = require('./auth/auth.js');
+const auth = require('./auth/auth.js');
 ////////////////////////////////////////////////
 const cookieParser = require('cookie-parser');
 const PORT = 3000;
@@ -19,7 +19,7 @@ app.use(cors( )); //working
 app.use(express.urlencoded({ extended: true }));
 
 //.. Route middlewares--/////////////////////////////////////
-// app.use("/auth",auth);
+app.use("/auth",auth);
 ///////////////////////////Routes////////////////////////
 app.get('/', async (req, res) =>{
     res.status(200).json({success :true ,  message : "Welcome to Taleem Cyclic API"});
