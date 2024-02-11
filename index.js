@@ -8,7 +8,7 @@ const db = require("./mongo.js");
 const auth = require('./auth/auth.js');
 ////////////////////////////////////////////////
 const cookieParser = require('cookie-parser');
-const PORT = 3000;
+const PORT = 5000;
 ////////////////////////////////////////////////////
 // debugger;
 const app = express()
