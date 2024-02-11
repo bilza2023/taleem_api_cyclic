@@ -6,10 +6,9 @@ process.on('uncaughtException', function (err) {
     process.exit(1);
 });
 //.......................................................
-mongoose.connect( "mongodb+srv://bilza2024:bils32611@taleem-db.oyecc5h.mongodb.net/" , { useNewUrlParser: true});
+mongoose.connect( "mongodb+srv://bilza2023:bils32611@skillzaadb.fswow27.mongodb.net/skillzaaDb" );
 const db = mongoose.connection;
 db.on('error',(error)=> {throw new Error(error)} );
-
 
 module.exports = db;
 
