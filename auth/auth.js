@@ -30,9 +30,6 @@ auth.post("/login", async function (req, res) {
   if ( bcrypt.compare(passwordPlain, user.password)) {
         const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-      // const status = user.status;
-      // const email = email ;
-
       res.set("Authorization", `Bearer ${token}`);
       return res.status(200).json({ message: "Login successful", token: token ,email});
   } else {
