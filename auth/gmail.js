@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const {API_URL} = require("../config.js");
-
+    
 async function sendGmail(studentemail,verificationId) {
     const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -13,7 +13,7 @@ async function sendGmail(studentemail,verificationId) {
   },
 });
 debugger;
-    // send mail with defined transport object
+    // send mail
     let info = await transporter.sendMail({
         from: 'taleem-help@taleem-student-registeration.iam.gserviceaccount.com', // sender address
         to: studentemail, // list of receivers
