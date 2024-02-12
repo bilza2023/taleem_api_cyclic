@@ -12,7 +12,7 @@ const { v4: uuid } = require('uuid');
 //-updated on 27-jan-2024
 auth.post("/login", async function (req, res) {
   try {
-  debugger;
+  // debugger;
     const email = req.body.email;
     const passwordPlain = req.body.password;
     // Input validation
@@ -75,7 +75,6 @@ auth.post("/signup", async function (req, res) {
 auth.post("/forgot_password", async function (req, res) {
   try {
     const email = req.body.email;
-    // Input validation
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
     }
@@ -88,16 +87,39 @@ auth.post("/forgot_password", async function (req, res) {
     const data = {verificationId }
         await Student.findOneAndUpdate({ email },{ $set: data },{  new: true});
    
-      // debugger;
     await send_Forget_Password_Gmail(email,verificationId);
     return res.status(200).json({  message: "A link has been sent to you" });
   
   } catch (error) {
-    return res.status(500).json({  message: "failed to send link please try later", error });
+    return res.status(500).json({  message: "Failed to send link please try later", error });
+  }
+});
+auth.post("/change_password", async function (req, res) {
+  try {
+    const email = req.body.email;
+    const passwordPlain = req.body.password;
+  
+    if (!email || !passwordPlain) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    const user = await Student.findOne({ email });
+    if (user) {
+      return res.status(404).json({ message: "This Email is not found" });
+    }
+    // debugger;
+    // const verificationId = uuid();
+    const hashedPassword = await bcrypt.hash(passwordPlain, 2);
+
+    const data = {password: hashedPassword }
+      await Student.findOneAndUpdate({ email },{ $set: data },{  new: true});
+    return res.status(200).json({  message: "Passsword has been changed" });
+
+  } catch (error) {
+    return res.status(500).json({  message: "Passsword could not been changed please try later", error });
   }
 });
 
-////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////
  // auth.get("/purchase", async function (req, res) {
   //   try {

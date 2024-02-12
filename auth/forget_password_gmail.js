@@ -18,7 +18,7 @@ debugger;
         from: 'taleem-help@taleem-student-registeration.iam.gserviceaccount.com', // sender address
         to: studentemail, // list of receivers
         subject: "no reply:Please change you email for taleem.help", // Subject line
-        html: `<p>We have got a request for change of password, please click the link below to change the passwrod. If this request was not initiated by you just ignore it.</p>
+        html: `<p>We have got a request for change of password, please click the link below to change the password. If this request was not initiated by you just ignore it.</p>
         <br/>
         <a href='https://taleem.help/change_forgot_password?id=${verificationId}'>Change Password</a>
         ` 
