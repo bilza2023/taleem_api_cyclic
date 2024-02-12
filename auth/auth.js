@@ -6,6 +6,7 @@ const express = require('express');
 const auth = express.Router();
 const Student = require("./student.js");
 const sendGmail = require("./gmail.js");
+const send_Forget_Password_Gmail = require("./forget_password_gmail.js");
 const { v4: uuid } = require('uuid');
 ////////////////////////////////////////////////////////
 //-updated on 27-jan-2024
@@ -69,6 +70,30 @@ auth.post("/signup", async function (req, res) {
     }
   } catch (error) {
     return res.status(500).json({  message: "signup failed", error });
+  }
+});
+auth.post("/forgot_password", async function (req, res) {
+  try {
+    const email = req.body.email;
+    // Input validation
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await Student.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "This Email does not  exists" });
+    }
+    const verificationId = uuid();
+    const data = {verificationId }
+        await Student.findOneAndUpdate({ email },{ $set: data },{  new: true});
+   
+      // debugger;
+    await send_Forget_Password_Gmail(email,verificationId);
+    return res.status(200).json({  message: "A link has been sent to you" });
+  
+  } catch (error) {
+    return res.status(500).json({  message: "failed to send link please try later", error });
   }
 });
 
